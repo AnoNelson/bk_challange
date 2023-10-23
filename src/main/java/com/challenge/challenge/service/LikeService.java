@@ -6,7 +6,6 @@ import com.challenge.challenge.model.Likes;
 import java.util.List;
 
 public interface LikeService {
-     int countLikes();
      boolean createOrUpdateLike(LikeDto post);
      boolean updateLike(Likes likes);
      List<Likes> activeLikesBYPost(String postId);

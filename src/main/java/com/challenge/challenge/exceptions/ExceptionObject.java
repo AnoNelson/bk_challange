@@ -1,17 +1,16 @@
 package com.challenge.challenge.exceptions;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class ExceptionObject {
+    private int status;
     private String message;
 
-    public ExceptionObject(String message) {
+    public ExceptionObject(String message,int status) {
         this.message = message;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+        this.status = status;
     }
 }

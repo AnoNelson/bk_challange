@@ -21,11 +21,6 @@ public class LikeServiceImpl implements LikeService {
     private final UserCoreService userCoreService;
 
     @Override
-    public int countLikes() {
-        return repository.countAllByStatus(EStatus.ACTIVE);
-    }
-
-    @Override
     public boolean createOrUpdateLike(LikeDto likeDto) {
         try {
             UserCore user = userCoreService.findUserById(likeDto.getUserId());

@@ -31,17 +31,17 @@ public class AuthenticationService {
     public TokenResponse authenticateUser(SimpleUserAuth userAuth, HttpServletRequest request) {
         UserCore userCore = userCoreRepo.findByUsername(userAuth.getUsername());
         if (userCore == null)
-            throw new GlobalException("User not found");
+            throw new AuthException("User not found");
 
         if (!userCore.isAccountEnabled() || userCore.isAccountLocked() || userCore.isAccountExpired()) {
-            throw new GlobalException("The account is disabled");
+            throw new AuthException("The account is disabled");
         }
         if (userAuth.getPassword() == null || !encoder.matches(userAuth.getPassword(), userCore.getPassword())) {
             userCore.setRisk(userCore.getRisk() + 1);
             if (userCore.getRisk() + 1 > MAX_RISK)
                 userCore.setAccountEnabled(false);
             userCoreRepo.save(userCore);
-            throw new GlobalException("Invalid credentials");
+            throw new AuthException("Invalid credentials");
         }
         userCore.setRisk(0);
         userCoreRepo.save(userCore);

@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -41,11 +40,13 @@ public class UserCore {
     protected boolean credentialsExpired = false;
     protected boolean accountEnabled = true;
     @OneToMany(mappedBy = "userCore")
+    @JsonIgnore
     private List<Post> posts;
     @OneToMany(mappedBy = "userCore")
+    @JsonIgnore
     private List<Comment> comments;
     @OneToOne(mappedBy = "userCore")
-    private Like like;
+    private Likes likes;
 
     @JsonIgnore
     protected int risk;
@@ -79,5 +80,22 @@ public class UserCore {
 
     public String getAuthorities() {
         return permissions;
+    }
+
+    @Override
+    public String toString() {
+        return "UserCore{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", authorityList=" + authorityList +
+                ", permissions='" + permissions + '\'' +
+                ", firstAuth=" + firstAuth +
+                ", accountExpired=" + accountExpired +
+                ", accountLocked=" + accountLocked +
+                ", credentialsExpired=" + credentialsExpired +
+                ", accountEnabled=" + accountEnabled +
+                ", risk=" + risk +
+                '}';
     }
 }

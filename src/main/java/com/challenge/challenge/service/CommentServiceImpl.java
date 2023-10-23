@@ -1,39 +1,53 @@
 package com.challenge.challenge.service;
 
+import com.challenge.challenge.dto.CommentDto;
+import com.challenge.challenge.exceptions.GlobalException;
 import com.challenge.challenge.model.Comment;
+import com.challenge.challenge.model.Post;
+import com.challenge.challenge.model.UserCore;
+import com.challenge.challenge.repository.CommentRepository;
+import com.challenge.challenge.repository.PostRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CommentServiceImpl implements CommentService{
+@AllArgsConstructor
+public class CommentServiceImpl implements CommentService {
+    private final PostRepository postService;
+    private final UserCoreService userCoreService;
+    private final CommentRepository repository;
+
     @Override
-    public List<Comment> getAllComment() {
-        return null;
+    public int countComment(String postId) {
+        return repository.findAllByPostId(postId).size();
     }
 
     @Override
-    public Comment getCommentById(String postId) {
-        return null;
+    public List<Comment> getCommentById(String commentId) {
+        try {
+            return repository.findAllByPostId(commentId);
+        } catch (Exception e) {
+            throw new GlobalException("unexpected error occurred: " + e.getMessage());
+        }
     }
 
     @Override
-    public Comment createComment(Comment post) {
-        return null;
-    }
-
-    @Override
-    public Comment updateComment(Comment post) {
-        return null;
-    }
-
-    @Override
-    public boolean deleteComment(String postId) {
-        return false;
-    }
-
-    @Override
-    public List<Comment> searchComment(String title) {
-        return null;
+    public boolean createComment(CommentDto dto) {
+        try {
+            UserCore user = userCoreService.findUserById(dto.getUserId());
+            Post post = postService.findById(dto.getPostId()).orElse(null);
+            if (user == null || post == null)
+                throw new GlobalException("Either the user or Post doesn't exist");
+            Comment comment = new Comment();
+            comment.setComment(dto.getComment());
+            comment.setPost(post);
+            comment.setUserCore(user);
+            repository.save(comment);
+            return true;
+        } catch (Exception e) {
+            throw new GlobalException("Exception occurred while creating comment: " + e.getMessage());
+        }
     }
 }

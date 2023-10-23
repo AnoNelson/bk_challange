@@ -1,5 +1,6 @@
 package com.challenge.challenge.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,9 +27,10 @@ public class Post {
     @Enumerated(value = EnumType.STRING)
     private EStatus status;
     @ManyToOne
+    @JsonIgnore
     private UserCore userCore;
     @OneToMany(mappedBy = "post")
-    private List<Like> likes;
+    private List<Likes> likes;
     @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
@@ -41,5 +43,17 @@ public class Post {
     @PreUpdate
     public void beforeUpdate(){
         this.updateDate = new Date();
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", creationDate=" + creationDate +
+                ", updateDate=" + updateDate +
+                ", status=" + status +
+                '}';
     }
 }

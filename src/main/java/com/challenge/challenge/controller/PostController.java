@@ -1,6 +1,7 @@
 package com.challenge.challenge.controller;
 
 import com.challenge.challenge.constants.ServerRoutes;
+import com.challenge.challenge.dto.PostResponse;
 import com.challenge.challenge.model.Post;
 import com.challenge.challenge.service.PostService;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @AllArgsConstructor

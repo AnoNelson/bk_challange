@@ -56,6 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(ServerRoutes.POST_UPDATE).permitAll()
                 .antMatchers(ServerRoutes.POST_GET_BY_ID).permitAll()
                 .antMatchers(ServerRoutes.POST_SEARCH).permitAll()
+                .antMatchers(ServerRoutes.LIKE).permitAll()
+                .antMatchers(ServerRoutes.COMMENT).permitAll()
                 .anyRequest().denyAll()
                 .and()
                 .httpBasic().disable()

@@ -1,8 +1,11 @@
 package com.challenge.challenge.service;
 
+import com.challenge.challenge.dto.PostResponse;
 import com.challenge.challenge.exceptions.GlobalException;
 import com.challenge.challenge.model.EStatus;
+import com.challenge.challenge.model.Likes;
 import com.challenge.challenge.model.Post;
+import com.challenge.challenge.repository.LikeRepository;
 import com.challenge.challenge.repository.PostRepository;
 import com.google.common.base.Strings;
 import lombok.AllArgsConstructor;
@@ -11,15 +14,23 @@ import org.springframework.stereotype.Service;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class PostServiceImpl implements PostService {
     private final PostRepository repository;
-
+    private final LikeService likeService;
+    private final CommentService commentService;
     @Override
-    public List<Post> getAllPost() {
-        return repository.findAll();
+    public List<PostResponse> getAllPost() {
+      List<Post> posts =  repository.findAll();
+      List<PostResponse> likes = posts.stream().map(post -> {
+          post.setLikes(likeService.activeLikesBYPost(post.getId()));
+          post.setComments(commentService.getCommentById(post.getId()));
+          return PostResponse.FROM_POST(post,post.getComments().size(),post.getLikes().size());
+      }).collect(Collectors.toList());
+      return likes;
     }
 
     @Override

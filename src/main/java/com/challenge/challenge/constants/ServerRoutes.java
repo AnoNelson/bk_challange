@@ -4,6 +4,8 @@ public class ServerRoutes {
     public final static String AUTH = "/api/auth";
     public final static String TEST = "/api/test";
     public final static String POST = "/api/post";
+    public final static String LIKE = "/api/like";
+    public static final String COMMENT = "/api/comment";
 
     public final static String POST_GET = POST;
     public final static String POST_UPDATE = POST+"/update";

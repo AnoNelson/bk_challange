@@ -2,6 +2,7 @@ package com.challenge.challenge.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -11,8 +12,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 
-@Configuration
-@EnableSwagger2
+//@EnableSwagger2
 public class SwaggerConfig {
     @Bean
     public Docket swaggerConfiguration() {
@@ -30,10 +30,9 @@ public class SwaggerConfig {
                 "A tech company that serve clients ",
                 "1.0",
                 null,
-                null,
-//                new springfox.documentation.service.Contact("NCSA", "https://cyber.gov.rw", "info@ncsa.gov.rw"),
-                null,
-                null,
+                new springfox.documentation.service.Contact("Bk_challenge", "https://bk.rw", "info@bk.rw"),
+                "API License",
+                "https://bk.rw",
                 Collections.emptyList());
     }
 }

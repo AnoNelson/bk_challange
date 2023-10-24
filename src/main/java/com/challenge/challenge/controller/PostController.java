@@ -1,16 +1,13 @@
 package com.challenge.challenge.controller;
 
 import com.challenge.challenge.constants.ServerRoutes;
-import com.challenge.challenge.dto.PostResponse;
 import com.challenge.challenge.model.Post;
 import com.challenge.challenge.service.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.List;
+import jakarta.validation.Valid;
 
 @RestController
 @AllArgsConstructor
@@ -18,7 +15,8 @@ public class PostController {
     final PostService postService;
 
     @GetMapping(ServerRoutes.POST_GET)
-    public ResponseEntity<?> getAllPost() {
+    public ResponseEntity<?> getAllPost() throws InterruptedException {
+        Thread.sleep(1000);
         return new ResponseEntity<>(postService.getAllPost(), HttpStatus.OK);
     }
 

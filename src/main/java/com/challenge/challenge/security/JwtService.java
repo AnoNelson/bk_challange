@@ -7,12 +7,12 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.challenge.challenge.exceptions.InvalidRequestOrigin;
 import com.challenge.challenge.exceptions.InvalidSubjectException;
 import com.challenge.challenge.model.UserCore;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;

@@ -8,11 +8,11 @@ import com.challenge.challenge.model.TokenResponse;
 import com.challenge.challenge.model.UserCore;
 import com.challenge.challenge.repository.UserRepository;
 import com.challenge.challenge.security.JwtService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 
 @Service
 @RequiredArgsConstructor

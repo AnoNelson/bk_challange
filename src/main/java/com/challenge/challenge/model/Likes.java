@@ -1,6 +1,7 @@
 package com.challenge.challenge.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,7 @@ public class Likes {
     @JsonIgnore
     private Post post;
     @Enumerated(value = EnumType.STRING)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private EStatus status;
     private Date creationDate;
     private Date updateDate;

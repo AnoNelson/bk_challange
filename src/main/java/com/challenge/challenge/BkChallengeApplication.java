@@ -7,6 +7,7 @@ import org.springframework.boot.web.embedded.tomcat.TomcatProtocolHandlerCustomi
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.concurrent.Executors;
 

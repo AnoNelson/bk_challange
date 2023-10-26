@@ -2,6 +2,7 @@ package com.challenge.challenge.service;
 
 import com.challenge.challenge.dto.PostResponse;
 import com.challenge.challenge.exceptions.GlobalException;
+import com.challenge.challenge.exceptions.ResponseException;
 import com.challenge.challenge.model.EStatus;
 import com.challenge.challenge.model.Likes;
 import com.challenge.challenge.model.Post;
@@ -34,8 +35,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post getPostById(String postId) {
-        Optional<Post> post = repository.findById(postId);
-        return post.isPresent() ? post.get() : null;
+        Post post = repository.findByIdAndStatus(postId,EStatus.ACTIVE);
+        return post;
     }
 
     @Override
@@ -53,10 +54,10 @@ public class PostServiceImpl implements PostService {
     public Post updatePost(@NotNull Post post) {
         try {
             if (Strings.isNullOrEmpty(post.getId()))
-                throw new GlobalException("Post to be updated can not be found");
+                throw new ResponseException("Post Id is missing");
             Post oldPost = getPostById(post.getId());
             if (oldPost == null)
-                throw new GlobalException("Post to be updated can not be found");
+                throw new ResponseException("Post to be updated can not be found");
             oldPost.setTitle(post.getTitle());
             oldPost.setDescription(post.getDescription());
             return repository.save(oldPost);
@@ -70,7 +71,7 @@ public class PostServiceImpl implements PostService {
         try {
             Post post = getPostById(postId);
             if (post == null)
-                throw new GlobalException("post can't be found");
+                throw new ResponseException("post can't be found");
             post.setStatus(EStatus.DELETED);
             repository.save(post);
             return true;

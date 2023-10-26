@@ -41,6 +41,11 @@ public class Post {
         this.setStatus(EStatus.ACTIVE);
     }
 
+    public Post(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
     @PreUpdate
     public void beforeUpdate(){
         this.updateDate = new Date();

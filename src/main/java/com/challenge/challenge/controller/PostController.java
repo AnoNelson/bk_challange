@@ -16,7 +16,7 @@ public class PostController {
 
     @GetMapping(ServerRoutes.POST_GET)
     public ResponseEntity<?> getAllPost() throws InterruptedException {
-        Thread.sleep(1000);
+//        Thread.sleep(1000);
         return new ResponseEntity<>(postService.getAllPost(), HttpStatus.OK);
     }
 
@@ -26,8 +26,8 @@ public class PostController {
     }
 
     @PostMapping(ServerRoutes.POST)
-    public ResponseEntity<?> savePost(@RequestBody @Valid Post post) {
-        return new ResponseEntity<>(postService.createPost(post), HttpStatus.OK);
+    public ResponseEntity<?> savePost(@RequestBody Post post) {
+        return new ResponseEntity<>(postService.createPost(post), HttpStatus.CREATED);
     }
 
     @DeleteMapping(ServerRoutes.POST_DELETE)

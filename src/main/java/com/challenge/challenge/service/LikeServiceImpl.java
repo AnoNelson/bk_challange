@@ -2,6 +2,7 @@ package com.challenge.challenge.service;
 
 import com.challenge.challenge.dto.LikeDto;
 import com.challenge.challenge.exceptions.GlobalException;
+import com.challenge.challenge.exceptions.ResponseException;
 import com.challenge.challenge.model.EStatus;
 import com.challenge.challenge.model.Likes;
 import com.challenge.challenge.model.Post;
@@ -26,7 +27,7 @@ public class LikeServiceImpl implements LikeService {
             UserCore user = userCoreService.findUserById(likeDto.getUserId());
             Post post = postService.findById(likeDto.getPostId()).orElse(null);
             if (user == null || post == null)
-                throw new GlobalException("Either the user or Post doesn't exist");
+                throw new ResponseException("Either the user or Post doesn't exist");
             Likes likes = repository.getLikeByUserAndPost(likeDto.getUserId(), likeDto.getPostId());
             if (likes == null) {
                 likes = new Likes();

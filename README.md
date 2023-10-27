@@ -45,7 +45,7 @@ Instructions on how to use them in your own application are linked below.
 For production release:
 
 ```sh
-mvn depl
+mvn deploy
 ```
 
 Generating Jar file skipping tests:

@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @Data
 @Entity
 @Table(name = "user_table")

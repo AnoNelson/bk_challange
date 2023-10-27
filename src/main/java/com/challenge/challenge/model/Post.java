@@ -1,12 +1,13 @@
 package com.challenge.challenge.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -38,6 +39,11 @@ public class Post {
     public void beforeCreate(){
         this.creationDate = new Date();
         this.setStatus(EStatus.ACTIVE);
+    }
+
+    public Post(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 
     @PreUpdate

@@ -2,6 +2,7 @@ package com.challenge.challenge.service;
 
 import com.challenge.challenge.dto.CommentDto;
 import com.challenge.challenge.exceptions.GlobalException;
+import com.challenge.challenge.exceptions.ResponseException;
 import com.challenge.challenge.model.Comment;
 import com.challenge.challenge.model.Post;
 import com.challenge.challenge.model.UserCore;
@@ -10,6 +11,7 @@ import com.challenge.challenge.repository.PostRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.lang.module.ResolutionException;
 import java.util.List;
 
 @Service
@@ -39,7 +41,7 @@ public class CommentServiceImpl implements CommentService {
             UserCore user = userCoreService.findUserById(dto.getUserId());
             Post post = postService.findById(dto.getPostId()).orElse(null);
             if (user == null || post == null)
-                throw new GlobalException("Either the user or Post doesn't exist");
+                throw new ResponseException("Either the user or Post doesn't exist");
             Comment comment = new Comment();
             comment.setComment(dto.getComment());
             comment.setPost(post);

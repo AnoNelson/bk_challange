@@ -3,6 +3,8 @@ package com.challenge.challenge.controller;
 import com.challenge.challenge.constants.ServerRoutes;
 import com.challenge.challenge.model.SimpleUserAuth;
 import com.challenge.challenge.service.AuthenticationService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import java.util.Arrays;
 @RestController
 @AllArgsConstructor

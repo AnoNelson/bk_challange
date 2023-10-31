@@ -26,7 +26,13 @@ git clone https://github.com/AnoNelson/bk_challange
 Open the project in any IDE (Preferable intellij IDEA)
 Run mvn install
 ```
+## Run and Check
+- OpenAPI Specification - Version 2.0
 
+```sh
+Run Spring Boot project. Open browser with url:
+http://localhost:<<port>>/swagger-ui/index.html
+```
 ## Plugins
 
 Dillinger is currently extended with the following plugins.

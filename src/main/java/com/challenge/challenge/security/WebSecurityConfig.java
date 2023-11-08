@@ -34,7 +34,6 @@ public class WebSecurityConfig {
             corsConfig.addAllowedMethod(HttpMethod.POST);
             corsConfig.addAllowedMethod(HttpMethod.GET);
             corsConfig.addAllowedMethod(HttpMethod.DELETE);
-//            corsConfig.setAllowedOrigins(List.of("https://172.16.32.37:8023", "https://197.243.3.212:2244"));
             return corsConfig;
         }
     }
@@ -52,16 +51,15 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(configurer -> configurer
                         .requestMatchers(whiteList).permitAll()
                         .requestMatchers(ServerRoutes.AUTH).permitAll()
-                        .requestMatchers("/thread").permitAll()
                         .requestMatchers(ServerRoutes.TEST).hasAuthority(Permissions.USER_MANAGEMENT.name())
-                        .requestMatchers(ServerRoutes.POST).permitAll()
-                        .requestMatchers(ServerRoutes.POST_GET).permitAll()
-                        .requestMatchers(ServerRoutes.POST_DELETE).permitAll()
-                        .requestMatchers(ServerRoutes.POST_UPDATE).permitAll()
-                        .requestMatchers(ServerRoutes.POST_GET_BY_ID).permitAll()
-                        .requestMatchers(ServerRoutes.POST_SEARCH).permitAll()
-                        .requestMatchers(ServerRoutes.LIKE).permitAll()
-                        .requestMatchers(ServerRoutes.COMMENT).permitAll()
+                        .requestMatchers(ServerRoutes.POST).hasAuthority(Permissions.POST_MANAGEMENT.name())
+                        .requestMatchers(ServerRoutes.POST_GET).hasAuthority(Permissions.POST_MANAGEMENT.name())
+                        .requestMatchers(ServerRoutes.POST_DELETE).hasAuthority(Permissions.POST_MANAGEMENT.name())
+                        .requestMatchers(ServerRoutes.POST_UPDATE).hasAuthority(Permissions.POST_MANAGEMENT.name())
+                        .requestMatchers(ServerRoutes.POST_GET_BY_ID).hasAuthority(Permissions.POST_MANAGEMENT.name())
+                        .requestMatchers(ServerRoutes.POST_SEARCH).hasAuthority(Permissions.POST_MANAGEMENT.name())
+                        .requestMatchers(ServerRoutes.LIKE).hasAuthority(Permissions.POST_MANAGEMENT.name())
+                        .requestMatchers(ServerRoutes.COMMENT).hasAuthority(Permissions.POST_MANAGEMENT.name())
                         .anyRequest().permitAll()).build();
     }
 }

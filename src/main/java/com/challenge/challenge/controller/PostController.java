@@ -15,8 +15,7 @@ public class PostController {
     final PostService postService;
 
     @GetMapping(ServerRoutes.POST_GET)
-    public ResponseEntity<?> getAllPost() throws InterruptedException {
-//        Thread.sleep(1000);
+    public ResponseEntity<?> getAllPost() {
         return new ResponseEntity<>(postService.getAllPost(), HttpStatus.OK);
     }
 

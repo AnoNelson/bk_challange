@@ -24,6 +24,7 @@ public class Post {
     @NotBlank
     private String description;
     private Date creationDate;
+    @JsonIgnore
     private Date updateDate;
     @Enumerated(value = EnumType.STRING)
     private EStatus status;

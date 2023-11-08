@@ -3,11 +3,11 @@ package com.challenge.challenge.model;
 import java.util.Arrays;
 
 public enum Permissions {
-    USER_MANAGEMENT, VIEW_DASHBOARD;
+    POST_MANAGEMENT,USER_MANAGEMENT, VIEW_DASHBOARD;
 
-    public static final String GET_PERMISSION(String role) {
-        if (Permissions.valueOf(role.toUpperCase()) != null &&
-                Permissions.valueOf(role.toUpperCase()).toString().equalsIgnoreCase(role)) {
+    public static String GET_PERMISSION(String role) {
+        Permissions.valueOf(role.toUpperCase());
+        if (Permissions.valueOf(role.toUpperCase()).toString().equalsIgnoreCase(role)) {
             return role.toUpperCase();
         }
         return null;
